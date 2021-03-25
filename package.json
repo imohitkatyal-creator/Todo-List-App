@@ -1,0 +1,18 @@
+{
+    "name": "todo_server",
+    "version": "1.0.0",
+    "description": "A full to do list",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Shubham Dagar",
+    "license": "ISC",
+    "dependencies": {
+        "ejs": "^2.6.2",
+        "express": "^4.17.1",
+        "mongoose": "^5.6.11",
+        "nodemon": "^1.19.1"
+    }
+}

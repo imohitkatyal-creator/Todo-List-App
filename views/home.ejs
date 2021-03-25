@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title%>
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="font-family: 'Arvo', serif;">TODO APP</h1>
+        <form action="/create-task" method="POST">
+            <div class='field' style="border-top: .5px lightgrey solid;">
+                <label class="text">Description</label>
+                <input type="text" name="name" placeholder="What do you need to do?" required class="input"
+                    style="padding-bottom: 20px; padding-left: 5%; width: 93%;">
+            </div>
+            <br>
+            <div id="border-container">
+                <div class="field" style="width: 48%;">
+                    <label class="text" style="left: 34px;">Category</label>
+                    <select name="category" class="input">
+                        <option value="Personal" selected>Personal</option>
+                        <option value="School">School</option>
+                        <option value="Work">Work</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="field" style="width: 45.5%; margin-left: -3.5px;">
+                    <label class="text">Due Date</label>
+                    <input type="date" name="date" required class="input" style="font-size: 16px;">
+                </div>
+            </div>
+            <br>
+            <div id="buttons">
+                <div style="display: inline-block; background: rgb(56, 53, 53); border-radius: 3px;">
+                    <i class="fa fa-plus" style="color: white; margin-left: 5px;"></i>
+                    <input type="submit" value="Add Task" class="button" style="background-color: rgb(56, 53, 53);">
+                </div>
+            </div>
+        </form>
+        <br>
+        <ul>
+            <% for(let i of all_elements){ %>
+            <li>
+                <span class='outer'><a href="/delete-task/?id=<%=i._id%>"><span class="check-box"><i
+                                class="fa fa-times"></i></span></a></span>
+                <div style="display: inline-block; width: 90%;">
+                    <div class="task-name" style="display: flex; justify-content: space-between;">
+                        <div>
+                            <%= i.name %>
+                        </div>
+                        <% if(i.category == 'Personal'){%>
+                        <div
+                            style="background: blue; display: inline-block; padding: 10px; font-size: 20px; font-weight: 600; font-family: sans-serif; color: white; border-radius: 5px;">
+                            <%= i.category %>
+                        </div>
+                        <% }else if(i.category == 'Cleaning'){ %>
+                        <div
+                            style="background: green; display: inline-block; padding: 10px; font-size: 20px; font-weight: 600; font-family: sans-serif; color: white; border-radius: 5px;">
+                            <%= i.category %>
+                        </div>
+                        <% }else if(i.category == 'School'){ %>
+                        <div
+                            style="background: yellow; display: inline-block; padding: 10px; font-size: 20px; font-weight: 600; font-family: sans-serif; color: white; border-radius: 5px;">
+                            <%= i.category %>
+                        </div>
+                        <% }else if(i.category == 'Work'){ %>
+                        <div
+                            style="background: red; display: inline-block; padding: 10px; font-size: 20px; font-weight: 600; font-family: sans-serif; color: white; border-radius: 5px;">
+                            <%= i.category %>
+                        </div>
+                        <% }else if(i.category == 'Other'){ %>
+                        <div
+                            style="background: rgb(56, 53, 53); display: inline-block; padding: 10px; font-size: 20px; font-weight: 600; font-family: sans-serif; color: white; border-radius: 5px;">
+                            <%= i.category %>
+                        </div>
+                        <% } %>
+                    </div>
+                    <%= i.date %>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+        <a href="/delete-all" style='text-decoration: none;'>
+            <span class="button">
+                <i class="fa fa-trash"></i>
+                Delete All Tasks
+            </span></a>
+    </div>
+</body>
+
+</html>
